@@ -1,0 +1,18 @@
+int sub(int x){
+    return x - 5
+}
+
+//single line comments
+/*Multi-line comments*/
+//operator precedence
+echo((8*4)+ 9 -(6*10))
+
+//multiplication
+echo(8*4)
+
+//division
+echo(8/4)
+
+//subtraction
+echo(sub(10))
+echo(sub(11))

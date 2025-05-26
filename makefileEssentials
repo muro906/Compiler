@@ -1,0 +1,12 @@
+print: $(wildcard *.cpp)
+	ls -la $?
+	touch print
+clean:
+	rm -f print
+
+# $? - Output  all prereq newer than target
+# $@ - Output the target name
+# $^ - Output the prereq
+# $< - Output first prereq
+# * searches the filesystem for matching names wrap it in wildcard function
+
