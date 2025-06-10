@@ -1,5 +1,14 @@
 extern void printd(double val)
 extern void printi(int val)
+
+//Create our own user defined function for subtracting and multiplying that uses doubles and returns double
+double subAndMul(double a, double b){
+    a = a - b
+    a = a * b
+    return a
+}
+
+printd(subAndMul(3.4, 8.9)) //should give -48.950
 //testing for support for doubles and their associated arithmetic operations +, -, *, Both operands should be of double type
 
 double a = 10.5
