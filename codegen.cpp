@@ -77,9 +77,27 @@ Value* NIdentifier::codeGen(CodeGenContext& context)
 		std::cerr << "undeclared variable " << name << endl;
 		return NULL;
 	}
+	Value* var = context.locals()[name]; // Retrieve stored value
 
+    // Attempt to cast the variable to an AllocaInst if it's allocated
+    if (AllocaInst* alloc = dyn_cast<AllocaInst>(var)) {
+        Type* varType = alloc->getAllocatedType(); // Get the allocated type
+
+        if (varType->isIntegerTy(64)) {
+            return new LoadInst(Type::getInt64Ty(MyContext), alloc, name, false, context.currentBlock());
+        } 
+        else if (varType->isDoubleTy()) {
+            return new LoadInst(Type::getDoubleTy(MyContext), alloc, name, false, context.currentBlock());
+        } 
+        else {
+            std::cerr << "Unsupported variable type for: " << name << std::endl;
+            return nullptr;
+        }
+
+
+	}
 	// return nullptr;  
-	return new LoadInst(context.locals()[name]->getType(),context.locals()[name], name, false, context.currentBlock());
+	// return new LoadInst(context.locals()[name]->getType(),context.locals()[name], name, false, context.currentBlock());
 }
 
 Value* NMethodCall::codeGen(CodeGenContext& context)
@@ -115,12 +133,26 @@ Value* NBinaryOps
 	std::cout << "Creating binary operation " << op << endl;
 	Instruction::BinaryOps instr;
 	CmpInst::Predicate instr2; //store the predicate e.g the enum value of llvm representing a particular comparison
+	Value * left = lhs.codeGen(context);
+	Value * right = rhs.codeGen(context);
+
+	if (!left || !right){
+		std::cerr<<"Error: Null operand in binary operation "<<std::endl;
+		return NULL;
+	}
+	Type* leftType = left->getType();
+	Type* rightType = left->getType();
+	if (leftType != rightType){
+		std::cerr<<"Type Mismatch "<<std::endl;
+	}
+	bool isFloat = leftType->isDoubleTy();
+
 	switch (op) {
 		/* To do Arithmetic operators*/
-		case PLUS: 		instr = Instruction::Add; goto math;
-		case MINUS: 	instr = Instruction::Sub; goto math;
-		case MUL: 		instr = Instruction::Mul; goto math;
-		case DIV: 		instr = Instruction::SDiv; goto math;
+		case PLUS: 		instr = isFloat ? Instruction::FAdd : Instruction::Add; goto math;
+		case MINUS: 	instr = isFloat ? Instruction::FSub : Instruction::Sub; goto math;
+		case MUL: 		instr = isFloat ? Instruction::FMul : Instruction::Mul; goto math;
+		case DIV: 		instr = isFloat ? Instruction::FDiv : Instruction::SDiv; goto math;
 		
 				
 		/* TODO comparison */

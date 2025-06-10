@@ -1,0 +1,28 @@
+extern void printd(double val)
+extern void printi(int val)
+//testing for support for doubles and their associated arithmetic operations +, -, *, Both operands should be of double type
+
+double a = 10.5
+
+//definition and declaration with assignment
+double b = 30.5 + 2.3
+
+//double literals
+printd(3.5 + 7.8)
+printd(a)
+printd(b)
+
+//Subtraction
+printd(9.0 - 5.0)
+
+//Multiplication
+printd(9.8 * 11.8)
+
+//divison
+printd(8.4 / 2.2)
+
+printd(9.8 / 2.0)
+
+//Operator precedence *, / , + , - 
+double c = (9.8 * 1.7 / 1.1) + 6.7 - (7.8 * 8.9) //answer should be -47.575 to 3dp
+printd(c)

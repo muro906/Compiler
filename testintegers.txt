@@ -1,0 +1,35 @@
+// A function defined in native.cpp file that uses c-style calling convention. It prints integer values
+extern void printi(int val)
+
+//Creating our own user defined functions that returns an integer
+int add(int b) {
+  int x = b * 5
+  return x + 3
+}
+
+int b = 20
+int d = 30
+int c = 10
+
+//Addition using our user-defined function
+printi(add(11))
+
+//Subtraction
+printi(10-20) // should print -10
+
+//Multiplication
+printi(11* 35)
+
+//division
+printi(20/5)
+
+//operator precedence
+int e = 10 * 20 / 5 + 16 - 54 / 9 * 18 //answer should be -52
+printi(e)
+
+//Comparisons with integer values
+printi(11 >= 2) // 1
+printi(d >= c) //d = 30 and c = 10: 1
+printi(b != 10) // b = 20 : 1
+printi(c != d) // 1
+printi(d)

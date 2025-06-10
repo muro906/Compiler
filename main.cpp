@@ -25,7 +25,6 @@ int main(int argc, char **argv)
 	InitializeNativeTargetAsmPrinter();
 	InitializeNativeTargetAsmParser();
 	CodeGenContext context;
-	createCoreFunctions(context);
 	context.generateCode(*rootNode);
 	context.runCode();
 	
