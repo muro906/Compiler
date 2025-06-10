@@ -5,6 +5,7 @@
 
 #define SAVE_TOKEN  yylval.string = new std::string(yytext, yyleng)
 #define TOKEN(t)    (yylval.token = t)
+#define DEBUGFLEX(a) fprintf(stderr, "\n%d: TOKEN=<ID>, lexeme=<%d, \"%s\">\n", yylineno, a, yytext)
 %}
 
 %option noyywrap
@@ -40,6 +41,6 @@
 "*"		          				return TOKEN(MUL);
 "/"				          		return TOKEN(DIV);
 
-.                       printf("Unknown token!\n"); yyterminate();
+.                       {printf("Unknown token!\n"); DEBUGFLEX(-1); exit(0);}
 
 %%
