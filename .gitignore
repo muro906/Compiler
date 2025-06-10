@@ -1,4 +1,7 @@
 corefn.cpp
 *.o
 makefileEssentials.txt
-
+parser.cpp
+parser.hpp
+tokens.cpp
+parser
