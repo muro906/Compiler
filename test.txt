@@ -5,14 +5,14 @@ int sub(int x){
 //single line comments
 /*Multi-line comments*/
 //operator precedence
-echo((8*4)+ 9 -(6*10))
+printi((8*4)+ 9 -(6*10))
 
 //multiplication
-echo(8*4)
+printi(8*4)
 
 //division
-echo(8/4)
+printi(8/4)
 
 //subtraction
-echo(sub(10))
-echo(sub(11))
+printi(sub(10))
+printi(sub(11))
