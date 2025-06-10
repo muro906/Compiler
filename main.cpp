@@ -12,7 +12,6 @@ void open_file(const char* filename) {
 	freopen(filename, "r", stdin);
 }
 
-void createCoreFunctions(CodeGenContext& context);
 
 int main(int argc, char **argv)
 {
